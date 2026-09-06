@@ -32,6 +32,19 @@ h1{margin:0;font-size:30px;letter-spacing:-.02em;font-weight:650}
 .pill{font:12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);
   background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:6px 11px}
 .pill b{color:var(--ink);font-weight:600}
+.controls{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  padding:12px 0;margin:0 0 26px;background:linear-gradient(var(--bg) 80%,transparent)}
+.controls input{flex:1 1 220px;max-width:400px;border:1px solid var(--line);border-radius:10px;
+  background:var(--panel);color:var(--ink);padding:9px 13px;font-size:14px;font-family:inherit}
+.controls input:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);cursor:pointer;
+  background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:6px 11px}
+.chip span{color:var(--faint);margin-left:3px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip[aria-pressed="true"] span{color:var(--bg);opacity:.75}
+#count{margin-left:auto;color:var(--muted);font:12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+#empty{color:var(--muted);font-size:14px}
 .grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fill,minmax(360px,1fr))}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;
   overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
@@ -86,8 +99,14 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
     <p class="tagline">Twelve information-dense ECharts scenes over a deliberately transparent presentation layer — sankey, sunburst, parallel coordinates, force graphs, treemaps, calendars, candlesticks and more.</p>
     <div class="meta"><span class="pill">Apache ECharts 6</span><span class="pill"><b>12</b> demos</span><span class="pill"><b>12</b> rendered</span></div>
   </header>
+  <section class="controls" aria-label="Gallery filters">
+    <input id="q" type="search" placeholder="Filter by title, blurb, tag, or family…" autocomplete="off" aria-label="Filter demos">
+    
+    <output id="count" aria-live="polite">12 shown</output>
+  </section>
+  <p id="empty" hidden>No demos match the current filter.</p>
   <main class="grid">
-      <article class="card">
+      <article class="card" data-family="flow" data-search="sankey where does renewable energy move and dissipate? sankey energy flow advanced 01 · flow flow">
         <figure class="shot dark"><img src="out/sankey-transparent.png" alt="Sankey" loading="lazy"></figure>
         <div class="body">
           <div class="idx">01 · flow</div>
@@ -98,7 +117,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="hierarchy" data-search="sunburst how is a research portfolio distributed across programs? sunburst hierarchy portfolio advanced 02 · hierarchy hierarchy">
         <figure class="shot dark"><img src="out/sunburst-transparent.png" alt="Sunburst" loading="lazy"></figure>
         <div class="body">
           <div class="idx">02 · hierarchy</div>
@@ -109,7 +128,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="multivariate" data-search="parallel how do expedition profiles differ across five conditions? parallel-coordinates fieldwork profiles advanced 03 · multivariate multivariate">
         <figure class="shot dark"><img src="out/parallel-transparent.png" alt="Parallel" loading="lazy"></figure>
         <div class="body">
           <div class="idx">03 · multivariate</div>
@@ -120,7 +139,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="network" data-search="knowledge graph which ideas bridge the climate knowledge graph? graph force knowledge advanced 04 · network network">
         <figure class="shot dark"><img src="out/knowledge-graph-transparent.png" alt="Knowledge graph" loading="lazy"></figure>
         <div class="body">
           <div class="idx">04 · network</div>
@@ -131,7 +150,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="hierarchy" data-search="treemap where does a product portfolio concentrate risk and value? treemap portfolio risk advanced 05 · hierarchy hierarchy">
         <figure class="shot dark"><img src="out/treemap-transparent.png" alt="Treemap" loading="lazy"></figure>
         <div class="body">
           <div class="idx">05 · hierarchy</div>
@@ -142,7 +161,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="temporal" data-search="calendar when do operational anomalies cluster through the year? calendar heatmap anomaly advanced 06 · temporal temporal">
         <figure class="shot dark"><img src="out/calendar-transparent.png" alt="Calendar" loading="lazy"></figure>
         <div class="body">
           <div class="idx">06 · temporal</div>
@@ -153,7 +172,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="financial" data-search="candlestick how do price, volume, and volatility align? candlestick volume finance advanced 07 · financial financial">
         <figure class="shot dark"><img src="out/candlestick-transparent.png" alt="Candlestick" loading="lazy"></figure>
         <div class="body">
           <div class="idx">07 · financial</div>
@@ -164,7 +183,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="profile" data-search="radar how do spacecraft subsystems trade performance for resilience? radar engineering comparison advanced 08 · profile profile">
         <figure class="shot dark"><img src="out/radar-transparent.png" alt="Radar" loading="lazy"></figure>
         <div class="body">
           <div class="idx">08 · profile</div>
@@ -175,7 +194,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="matrix" data-search="heatmap where are service dependencies both slow and frequent? heatmap matrix operations advanced 09 · matrix matrix">
         <figure class="shot dark"><img src="out/heatmap-transparent.png" alt="Heatmap" loading="lazy"></figure>
         <div class="body">
           <div class="idx">09 · matrix</div>
@@ -186,7 +205,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="monitoring" data-search="gauge cluster can a compact instrument panel communicate system health? gauge dashboard health advanced 10 · monitoring monitoring">
         <figure class="shot dark"><img src="out/gauge-cluster-transparent.png" alt="Gauge cluster" loading="lazy"></figure>
         <div class="body">
           <div class="idx">10 · monitoring</div>
@@ -197,7 +216,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="process" data-search="funnel where does a scientific recruitment pipeline lose candidates? funnel process conversion advanced 11 · process process">
         <figure class="shot dark"><img src="out/funnel-transparent.png" alt="Funnel" loading="lazy"></figure>
         <div class="body">
           <div class="idx">11 · process</div>
@@ -208,7 +227,7 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
 </code></pre></details>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-family="temporal composition" data-search="river how do cultural themes rise and fall across decades? theme-river streamgraph culture advanced 12 · temporal composition temporal composition">
         <figure class="shot dark"><img src="out/river-transparent.png" alt="River" loading="lazy"></figure>
         <div class="body">
           <div class="idx">12 · temporal composition</div>
@@ -226,5 +245,38 @@ footer code{background:var(--chip);border-radius:4px;padding:2px 6px;
     <code>out/</code>, so open this file straight from the checkout.
   </footer>
 </div>
+<script>
+(function(){
+  var q=document.getElementById('q'),count=document.getElementById('count'),empty=document.getElementById('empty');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var chips=[].slice.call(document.querySelectorAll('.chip'));
+  var family='';
+  function apply(){
+    var t=q.value.trim().toLowerCase(),n=0;
+    for(var i=0;i<cards.length;i++){
+      var c=cards[i];
+      var ok=(!family||c.getAttribute('data-family')===family)&&
+             (!t||(c.getAttribute('data-search')||'').indexOf(t)>=0);
+      c.style.display=ok?'':'none';
+      if(ok)n++;
+    }
+    count.value=n+' / '+cards.length+' shown';
+    empty.hidden=n>0;
+    for(var j=0;j<chips.length;j++){
+      var ch=chips[j];
+      ch.setAttribute('aria-pressed',String(ch.getAttribute('data-family')===family));
+    }
+  }
+  q.addEventListener('input',apply);
+  chips.forEach(function(ch){
+    ch.addEventListener('click',function(){
+      var f=ch.getAttribute('data-family');
+      family=(f===family)?'':f;
+      apply();
+    });
+  });
+  apply();
+})();
+</script>
 </body>
 </html>

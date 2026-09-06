@@ -2,6 +2,8 @@
 
 Twelve polished, information-dense ECharts scenes with a deliberately transparent presentation layer.
 
+Browse every demo with its source in **[gallery.html](gallery.html)** — searchable, follows your light/dark theme.
+
 `catalog.json` records the analytical use, question, chart family, complexity, and tags.
 
 | Sankey | Sunburst | Parallel coordinates | Knowledge graph |
