@@ -8,9 +8,10 @@ build:
     [[ -d node_modules ]] || npm ci --no-fund --no-audit
     npm run build
 
-# Type-check, then re-render all captures.
+# Type-check, gallery discovery regression, then re-render all captures.
 test: build
     npm test
+    python3 tools/gallery_test.py
 
 # Browser demo repo — no binary, no launcher (ADR-749: nothing to install).
 install:

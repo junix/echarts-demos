@@ -44,12 +44,17 @@ def tracked_files() -> set:
     """
     try:
         out = subprocess.run(
-            ["git", "-C", str(ROOT), "ls-files"],
-            capture_output=True, text=True, timeout=20,
+            ["git", "-C", str(ROOT), "ls-files", "-z"],
+            capture_output=True, timeout=20,
         )
     except (OSError, subprocess.SubprocessError):
         return set()
-    return set(out.stdout.split()) if out.returncode == 0 else set()
+    if out.returncode != 0:
+        return set()
+    # -z lists paths verbatim, NUL-terminated — no C-style quoting, so names
+    # with spaces or non-ASCII bytes survive. surrogateescape decodes them the
+    # same way pathlib reads them back off disk, so membership matches.
+    return {p for p in out.stdout.decode("utf-8", "surrogateescape").split("\0") if p}
 
 
 TRACKED = None
